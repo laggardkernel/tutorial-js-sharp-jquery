@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Colored Table</title>
+  <script type="text/javascript" src="../../scripts/jquery.js"></script>
+</head>
+
+<body>
+  <table id="tb">
+    <tbody>
+      <tr>
+        <td>line 1</td>
+        <td>line 1</td>
+      </tr>
+      <tr>
+        <td>line 2</td>
+        <td>line 2</td>
+      </tr>
+      <tr>
+        <td>line 3</td>
+        <td>line 3</td>
+      </tr>
+      <tr>
+        <td>line 4</td>
+        <td>line 4</td>
+      </tr>
+      <tr>
+        <td>line 5</td>
+        <td>line 5</td>
+      </tr>
+      <tr>
+        <td>line 6</td>
+        <td>line 6</td>
+      </tr>
+    </tbody>
+  </table>
+  <script type="text/javascript">
+  $(function() {
+    $("#tb > tbody > tr:even").css('background-color', '#888');
+  });
+
+  </script>
+</body>
+
+</html>

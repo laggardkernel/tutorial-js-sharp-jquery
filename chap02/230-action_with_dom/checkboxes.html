@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Checkbox Test</title>
+</head>
+
+<body>
+  <div>
+    <input type="checkbox" name="check" value="1" checked="checked" />
+    <input type="checkbox" name="check" value="2" />
+    <input type="checkbox" name="check" value="3" checked="checked" />
+    <input type="button" value="Number of selected" id="btn">
+  </div>
+  <script type="text/javascript">
+  window.onload = function() {
+    var btn = document.getElementById('btn');
+    btn.onclick = function() {
+      var arrays = new Array();
+      var items = document.getElementsByName('check');
+      for (var i = 0; i < items.length; i++) {
+        if (items[i].checked) {
+          arrays.push(items[i].value);
+        }
+      }
+      alert("Number of selected: " + arrays.length);
+    };
+  };
+
+  </script>
+</body>
+
+</html>

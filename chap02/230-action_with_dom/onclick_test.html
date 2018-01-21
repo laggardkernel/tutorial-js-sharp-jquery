@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>onclick examples</title>
+</head>
+
+<body>
+  <div>
+    <p>Test 1</p>
+    <p>Test 2</p>
+    <script type="text/javascript">
+    window.onload = function() {
+      var items = document.getElementsByTagName('p');
+      for (var i = 0; i < items.length; i++) {
+        items[i].onclick = function() {
+          alert(this.innerText);
+        };
+      }
+    };
+
+    </script>
+  </div>
+</body>
+
+</html>

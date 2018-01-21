@@ -1,0 +1,70 @@
+* {
+  /* overwrite default */
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-size: 12px;
+  text-align: center;
+}
+
+h2 {
+  line-height: 150%;
+  margin: 15px auto;
+}
+
+a {
+  color: #04d;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #f50;
+  text-decoration: underline;
+}
+
+.subcategorybox {
+  width: 600px;
+  /* center align block element */
+  margin: 0 auto;
+  text-align: center;
+  margin-top: 40px;
+}
+
+.subcategorybox ul {
+  list-style: none;
+}
+
+.subcategorybox ul li {
+  /* make <li> block-level to set width for it */
+  display: block;
+  float: left;
+  width: 200px;
+  line-height: 20px;
+}
+
+.showmore {
+  clear: both;
+  text-align: center;
+  padding-top: 10px;
+}
+
+.showmore a {
+  /* give hyperlink some width */
+  display: block;
+  width: 120px;
+  margin: 0 auto;
+  line-height: 24px;
+  border: 1px solid #aaa;
+}
+
+.showmore a span {
+  /* give some space for background image */
+  padding-left: 15px;
+  background: url('../images/down.gif') no-repeat 0 0;
+}
+
+.promoted a {
+  color: #f50;
+}
