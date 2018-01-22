@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-CHS">
+
+<head>
+  <meta charset="utf-8">
+  <title>Placeholder Simulation</title>
+  <script type="text/javascript" src='../../scripts/jquery.js'></script>
+  <style type="text/css">
+  #form1 {
+    width: 140px;
+    display: block;
+    margin: 0px auto;
+    margin-top: 40px;
+  }
+
+  #form1 * {
+    display: block;
+    margin: 10px auto;
+  }
+
+  </style>
+</head>
+
+<body>
+  <form method="GET" id="form1">
+    <input type="text" name="address" id="address" value="请输入邮箱地址" />
+    <input type="text" name="password" id="password" value="请输入邮箱密码" />
+    <input type="button" name="login" value="登录" />
+  </form>
+  <script type="text/javascript">
+  $(function() {
+    $('#form1 > input[type=text]').each(function(index, element) {
+      // console.log(element);
+      $(element).focus(function() {
+        if ($(this).val() === this.defaultValue) {
+          $(this).val('');
+        }
+      });
+      $(element).blur(function() {
+        if ($(this).val() === '') {
+          $(this).val(this.defaultValue);
+        }
+      });
+
+    });
+  });
+
+  </script>
+</body>
+
+</html>

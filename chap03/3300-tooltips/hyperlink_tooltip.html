@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-CHS">
+
+<head>
+  <meta charset="utf-8">
+  <title>超链接提示</title>
+  <script type="text/javascript" src='../../scripts/jquery.js'></script>
+  <style type="text/css">
+  body {
+    margin: 0;
+    padding: 40px;
+    background-color: #fff;
+    font-size: 80%;
+    font-family: Helvetica, Arial, sans-serif;
+    color: #555;
+    line-height: 180%;
+  }
+
+  p {
+    clear: both;
+    margin: 0;
+    padding: 0.5em 0;
+  }
+
+  #tooltip {
+    position: absolute;
+    border: 1px solid #333;
+    background-color: #f7f5d1;
+    color: #333;
+    /* hide tooltips by default */
+    display: none;
+  }
+
+  </style>
+</head>
+
+<body>
+  <p><a href="#" class="tooltip" title="这是我的超链接提示 1.">提示 1.</a></p>
+  <p><a href="#" class="tooltip" title="这是我的超链接提示 2.">提示 2.</a></p>
+  <p><a href="#" title="这是自带提示 1.">自带提示 1.</a></p>
+  <p><a href="#" title="这是自带提示 2.">自带提示 2.</a></p>
+  <script type="text/javascript">
+  $(function() {
+    var x = 10,
+      y = 20;
+    $('a.tooltip').mouseover(function(event) {
+      this.myTitle = this.title; // backup title to disable default tooltip
+      this.title = '';
+      var tooltip = "<div id='tooltip'>" + this.myTitle + "</div>";
+      $('body').append(tooltip);
+      $('#tooltip').css({
+        "top": (event.pageY + y) + 'px',
+        "left": (event.pageX + x) + 'px'
+      }).show('fast');
+    }).mouseout(function(event) {
+      this.title = this.myTitle;
+      $('#tooltip').remove();
+    }).mousemove(function(event) {
+      /* update tooltip position according to mouse position */
+      $('#tooltip').css({
+        "top": (event.pageY + y) + 'px',
+        "left": (event.pageX + x) + 'px'
+      });
+    });
+  });
+
+  </script>
+</body>
+
+</html>
