@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Popping</title>
+  <script type="text/javascript" src="../../scripts/jquery.js"></script>
+  <style type="text/css">
+  * {
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-size: 13px;
+    line-height: 130%;
+    padding: 60px;
+  }
+
+  #content {
+    width: 220px;
+    border: 1px solid #0050d0;
+    background-color: #96e555;
+  }
+
+  span {
+    width: 200px;
+    /* indent 10px */
+    margin: 10px;
+    background-color: #666666;
+    cursor: pointer;
+    color: white;
+    /* take whole width of screen */
+    display: block;
+  }
+
+  p {
+    width: 200px;
+    background-color: #888;
+    color: white;
+    height: 16px;
+  }
+
+  #reset {
+    float: right;
+    margin-right: 10px;
+  }
+
+  </style>
+</head>
+
+<body>
+  <div id="content">
+    外层 div 元素
+    <span>内层 span 元素</span> 外层 div 元素
+    <button id="reset">Reset</button>
+  </div>
+  <div id="msg"></div>
+  <script type="text/javascript">
+  $(function() {
+    $('span').click(function() {
+      var txt = $('#msg').html() + "<p>内层 span 元素被点击</p>";
+      $('#msg').html(txt);
+    });
+    $('#content').click(function() {
+      var txt = $('#msg').html() + "<p>外层 div 元素被点击</p>";
+      $('#msg').html(txt);
+    });
+    $('body').click(function() {
+      var txt = $('#msg').html() + "<p>body 元素被点击</p>";
+      $('#msg').html(txt);
+    });
+    $('#reset').click(function(event) {
+      $('#msg').html('');
+      event.stopPropagation();
+    });
+  });
+
+  </script>
+</body>
+
+</html>
