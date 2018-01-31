@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-CHS">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Checkbox Events with jQuery</title>
+  <script type="text/javascript" src="../../scripts/jquery.js"></script>
+  <style type="text/css">
+
+
+  </style>
+</head>
+
+<body>
+  <form>
+    你爱好的运动是什么？
+    <input type="checkbox" /><span class="selectAll">全选</span><span class="deselectAll">全不选</span> <a href="#" class="invertSelect">反选</a>
+    <br />
+    <input type="checkbox" name="items" value="足球" />足球
+    <input type="checkbox" name="items" value="篮球" />篮球
+    <input type="checkbox" name="items" value="羽毛球" />羽毛球
+    <input type="checkbox" name="items" value="乒乓球" />乒乓球
+    <br/>
+    <input type="button" id="send" value="提 交">
+  </form>
+  <script type="text/javascript">
+  $(function() {
+    var $form = $('form'),
+      $items = $form.find('input[name=items]'),
+      $selectAll = $form.find(":checkbox").eq(0),
+      $selectAllLabel = $form.find('.selectAll'),
+      $deselectAllLabel = $form.find('.deselectAll'),
+      $invertSelect = $form.find('.invertSelect'),
+      $send = $form.find('#send');
+
+    // reset status
+    $form.find('*').show().off();
+    $form.find(':checkbox').prop('checked', false);
+    $deselectAllLabel.hide();
+
+    $form.off().submit(function(event) {
+      event.preventDefault();
+      // alert($form.serialize());
+      var text = '';
+      $items.filter(":checked").each(function(index, element) {
+        text += element.value + '\r\n';
+      });
+      alert("Your selection:\r\n" + text);
+    });
+
+    $send.click(function() {
+      $form.submit();
+    });
+
+    $selectAll.on('click', function() {
+      if (this.checked) {
+        $deselectAllLabel.show();
+        $selectAllLabel.hide();
+        $items.prop('checked', true);
+      } else {
+        $selectAllLabel.show();
+        $deselectAllLabel.hide();
+        $items.prop('checked', false);
+      }
+    });
+
+    $invertSelect.on('click', function() {
+      $items.each(function(index, element) {
+        element.checked = !element.checked;
+      });
+      $items.eq(0).trigger('change');
+    });
+
+    $items.on('change', function() {
+      if ($items.length === $items.filter(":checked").length) {
+        $selectAll.prop('checked', true);
+        $selectAllLabel.hide();
+        $deselectAllLabel.show();
+      } else {
+        $selectAll.prop('checked', false);
+        $selectAllLabel.show();
+        $deselectAllLabel.hide();
+      }
+    });
+  });
+
+  </script>
+</body>
+
+</html>

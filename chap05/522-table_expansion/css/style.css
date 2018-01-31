@@ -1,0 +1,41 @@
+table {
+  border: 0;
+  border-collapse: collapse;
+}
+
+td {
+  font-size: 12px;
+  font-family: Helvetica, Arial, sans-serif;
+  font-weight: normal;
+  padding: 2px;
+  width: 100px;
+}
+
+th {
+  font-size: 12px;
+  font-family: Helvetica, Arial, sans-serif;
+  font-weight: bold;
+  text-align: left;
+  /* 缩进略大于 <td> */
+  padding: 4px;
+  border-bottom: 1px solid #333;
+  width: 100px;
+}
+
+.parent {
+  background-color: #fff38f;
+  cursor: pointer;
+}
+
+.even {
+  background-color: #fff38f;
+}
+
+.odd {
+  background-color: #ffffee;
+}
+
+.selected {
+  background-color: #ff6500;
+  color: #fff;
+}

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-CHS">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Drop-down Box Demo</title>
+  <script type="text/javascript" src="../../scripts/jquery.js"></script>
+  <style type="text/css">
+  * {
+    margin: 0;
+    padding: 0;
+  }
+
+  div.content {
+    float: left;
+    text-align: center;
+    margin: 10px;
+  }
+
+  span {
+    display: block;
+    margin: 2px 2px;
+    padding: 4px 10px;
+    background-color: #898989;
+    cursor: pointer;
+    font-size: 12px;
+    color: white;
+  }
+
+  </style>
+</head>
+
+<body>
+  <div class="content">
+    <select multiple id="select1" style="width:100px;height:160px;" />
+    <option value="1">选项 1</option>
+    <option value="2">选项 2</option>
+    <option value="3">选项 3</option>
+    <option value="4">选项 4</option>
+    <option value="5">选项 5</option>
+    <option value="6">选项 6</option>
+    <option value="7">选项 7</option>
+    <option value="8">选项 8</option>
+    </select>
+    <div>
+      <span id="add">选中添加到右边&gt:&gt:</span>
+      <span id="add_all">全部添加到右边&gt:&gt:</span>
+    </div>
+  </div>
+  <div class="content">
+    <select multiple="true" id="select2" style="width:100px;height:160px;">
+    </select>
+    <div>
+      <span id="remove">&lt:&lt:选中删除到左边</span>
+      <span id="remove_all">&lt:&lt:全部删除到左边</span>
+    </div>
+  </div>
+  <script type="text/javascript">
+  $('#add').on('click', function() {
+    var $options = $('#select1 > option:selected');
+    $options.appendTo('#select2');
+  });
+
+  $('#add_all').on('click', function() {
+    var $options = $('#select1 > option');
+    $options.appendTo('#select2');
+  });
+
+  $('#select1').on('dblclick', 'option', function() {
+    /* event delegation for options,
+     * first click select the option.
+     */
+    $(this).appendTo('#select2');
+  });
+
+  $('#remove').on('click', function() {
+    var $options = $('#select2 > option:selected');
+    $options.appendTo('#select1');
+  });
+
+  $('#remove_all').on('click', function() {
+    var $options = $('#select2 > option');
+    $options.appendTo('#select1');
+  });
+
+  $('#select2').on('dblclick', 'option', function() {
+    $(this).appendTo('#select1');
+  });
+
+  </script>
+</body>
+
+</html>

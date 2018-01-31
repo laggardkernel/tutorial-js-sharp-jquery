@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="zh-CHS">
+
+<head>
+  <title>Form Validation with jQuery</title>
+  <script type="text/javascript" src="../../scripts/jquery.js"></script>
+  <style type="text/css">
+  body {
+    font-size: 12px;
+    font-family: Helvetica, Arial, sans-serif;
+    color: #666;
+  }
+
+  form div {
+    margin: 5px 0;
+  }
+
+  .int label {
+    /* align texts to the right */
+    float: left;
+    width: 100px;
+    text-align: right;
+  }
+
+  .int input {
+    padding: 1px 1px;
+    border: 1px solid #ccc;
+    height: 16px;
+  }
+
+  .sub {
+    /* align with input */
+    padding-left: 100px;
+  }
+
+  .sub input {
+    /* right margin between buttons */
+    margin-right: 10px;
+  }
+
+  .formtips {
+    width: 200px;
+    margin: 2px;
+    padding: 2px;
+  }
+
+  .onError {
+    /* there is no height defined for span */
+    background: #ffe0e9 url('./img/reg3.gif') no-repeat 0 center;
+    /* left padding for img */
+    padding-left: 25px;
+  }
+
+  .onSuccess {
+    background: #e9fbeb url('./img/reg4.gif') no-repeat 0 center;
+    padding-left: 25px;
+  }
+
+  .high {
+    color: red;
+  }
+
+  </style>
+</head>
+
+<body>
+  <form method="post" action="">
+    <div class="int">
+      <label for="username">用户名：</label>
+      <input type="text" name="username" id="username" class="required" />
+    </div>
+    <div class="int">
+      <label for="email">邮箱：</label>
+      <input type="text" name="email" id="email" class="required" />
+    </div>
+    <div class="int">
+      <label>个人资料：</label>
+      <input type="text" name="personinfo" id="personinfo" />
+    </div>
+    <div class="sub">
+      <input type="submit" value="提交" id="send" />
+      <input type="reset" value="重置" id="res" />
+    </div>
+  </form>
+  <script type="text/javascript">
+  $(function() {
+    /* highlight symbol for required fields */
+    $('form :input.required').each(function(index, element) {
+      var $required = $('<strong class="high"> *</strong>');
+      $required.insertAfter(element);
+    });
+  });
+
+  $('form :input').on('blur', function() {
+    var $parent = $(this).parent(); // direct parent
+
+    /* reset formtip messages */
+    $parent.find('.formtips').remove();
+
+    if ($(this).is('#username')) {
+      if (this.value.trim() === '' || this.value.trim().length < 6) {
+        var errorMsg = '请输入至少 6 位的用户名.';
+        $parent.append('<span class="formtips onError">' + errorMsg + '</span>');
+      } else {
+        var okMsg = '输入正确.';
+        $parent.append('<span class="formtips onSuccess">' + okMsg + '</span>');
+      }
+    }
+
+    if ($(this).is('#email')) {
+      var reg = /.+@.+\.[a-zA-Z]{2,4}$/;
+      if (this.value.trim() === '' || (this.value.trim() !== '' && !reg.test(this.value.trim()))) {
+        var errorMsg = '请输入正确的 E-Mail 地址.';
+        $parent.append('<span class="formtips onError">' + errorMsg + '</span>');
+      } else {
+        var okMsg = '输入正确.';
+        $parent.append('<span class="formtips onSuccess">' + okMsg + '</span>');
+      }
+    }
+  }).on('keyup', function() {
+    /* validate form on the go */
+    $(this).triggerHandler('blur');
+  }).on('focus', function() {
+    $(this).triggerHandler('blur');
+  });
+
+  $('#send').on('click', function() {
+    /* trigger form validation before submission */
+    $('form .required:input').each(function(index, element) {
+      $(element).triggerHandler('blur');
+    });
+    // console.log($('form .onError').length);
+    if ($('form .onError').length > 0) {
+      return false;
+    }
+    alert('注册成功，密码已发送到邮箱，注意查收.');
+  });
+
+  </script>
+</body>
+
+</html>
