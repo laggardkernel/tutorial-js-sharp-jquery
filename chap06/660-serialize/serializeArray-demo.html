@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-CHS">
+
+<head>
+  <meta charset="utf-8" />
+  <title>serializeArray in jQuery</title>
+  <link rel="stylesheet" type="text/css" href="./style.css" />
+  <script type="text/javascript" src="../../scripts/jquery.js"></script>
+</head>
+
+<body>
+  <input type="checkbox" name="check" value="1" checked="checked" />篮球
+  <br />
+  <input type="checkbox" name="check" value="2" />足球
+  <br />
+  <input type="checkbox" name="check" value="3" />乒乓球
+  <br />
+  <input type="checkbox" name="check" value="4" />羽毛球
+  <br />
+  <input type="radio" name="radio" value="1" checked="checked" />篮球
+  <br />
+  <input type="radio" name="radio" value="2" />足球
+  <br />
+  <input type="radio" name="radio" value="3" />乒乓球
+  <br />
+  <input type="radio" name="radio" value="4" />羽毛球
+  <br />
+  <button id="send">提交</button>
+  <div class="resText" id="results"></div>
+  <script type="text/javascript">
+  $(function() {
+    $('#send').click(function(event) {
+      var fields = $(':checkbox,:radio').serializeArray();
+      console.log(fields);
+      $.each(fields, function(index, value) {
+        $('#results').append(value.value + " , ")
+      });
+    });
+  });
+
+  </script>
+</body>
+
+</html>

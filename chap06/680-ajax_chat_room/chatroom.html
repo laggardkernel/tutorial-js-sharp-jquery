@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-CHS">
+
+<head>
+  <meta charset="utf-8">
+  <title>Chat Room</title>
+  <link rel="stylesheet" type="text/css" href="./style.css">
+  <script type="text/javascript" src="../../scripts/jquery.js"></script>
+</head>
+
+<body>
+  <div id="wrapper">
+    <p id="messagewindow"><span id="loading">加载中...</span></p>
+    <form id="chatform">
+      姓名：
+      <input type="text" name="author" id="author" size="50" />
+      <br /> 内容：
+      <input type="text" name="msg" id="msg" size="50" />
+      <br />
+      <input type="submit" name="submit" value="发送" />
+      <br />
+    </form>
+  </div>
+  <!-- load scripts at the end -->
+  <script type="text/javascript">
+  var timestamp = 0;
+  updateMsg();
+  $('#chatform').submit(function(event) {
+    $.post('./backend.php', {
+      message: $('#msg').val(),
+      name: $('#author').val(),
+      action: 'postmsg',
+      time: timestamp
+    }, function(xml) {
+      $('#msg').val('');
+      addMessage(xml);
+    });
+    return false;
+  });
+
+  function updateMsg() {
+    $.post('backend.php', { time: timestamp }, function(xml) {
+      $('#loading').val('');
+      addMessage(xml);
+    });
+    setTimeout('updateMsg()', 4000);
+  }
+
+  function addMessage(xml) {
+    if ($('status', xml).text() === '2') return;
+    timestamp = $('time', xml).text();
+    $('message', xml).each(function() {
+      var author = $('author', this).text(),
+        content = $('text', this).text(),
+        htmlcode = "<strong>" + author + "</strong>: " + content +
+        " <br />";
+      $('#messagewindow').prepend(htmlcode);
+    });
+  }
+
+  </script>
+</body>
+
+</html>

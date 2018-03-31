@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="zh-CHS">
+
+<head>
+  <meta charset="utf-8" />
+  <title>getScript in jQuery</title>
+  <link rel="stylesheet" type="text/css" href="./style.css" />
+  <script type="text/javascript" src="../../scripts/jquery.js"></script>
+</head>
+
+<body>
+  <button id="go">运行</button>
+  <div class="block"></div>
+  <script type="text/javascript">
+  $(function() {
+    $.getScript('./jquery.color.js', function() {
+      $('#go').click(function(event) {
+        $('.block').animate({ backgroundColor: 'pink' }, 1000)
+          .animate({ backgroundColor: 'blue' }, 1000);
+      });
+    });
+  });
+
+  </script>
+</body>
+
+</html>

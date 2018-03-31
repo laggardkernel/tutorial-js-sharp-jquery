@@ -1,0 +1,41 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-size: 12px;
+  margin: 30px;
+}
+
+#loading {
+  width: 80px;
+  height: 20px;
+  background-color: #bbb;
+  color: #000;
+  display: none;
+}
+
+.comment {
+  margin-top: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  background-color: #ddd;
+}
+
+.comment h6 {
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.para {
+  margin-top: 5px;
+  text-indent: 2em;
+  background-color: #ddd;
+}
+
+.block {
+  width: 80px;
+  height: 80px;
+  background-color: #ddd;
+}

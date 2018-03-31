@@ -1,0 +1,28 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-size: 12px;
+  margin: 30px;
+}
+
+#wrapper {
+  margin: auto;
+  width: 438px;
+}
+
+#messagewindow {
+  height: 250px;
+  border: 1px solid;
+  padding: 5px;
+  overflow: auto;
+}
+
+#loading {
+  width: 80px;
+  height: 20px;
+  background-color: #bbb;
+  color: #000;
+}

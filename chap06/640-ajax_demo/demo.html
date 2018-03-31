@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-CHS">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Ajac demo</title>
+</head>
+
+<body>
+  <input type="button" value="Ajax 提交" onclick="Ajax();" />
+  <div id="resText"></div>
+  <script type="text/javascript">
+  function Ajax() {
+    var xmlHttpReq = null;
+    if (window.ActiveOject) {
+      xmlHttpReq = new ActiveXObject("Microsoft.XMLHTTP");
+    } else if (window.XMLHttpRequest) {
+      xmlHttpReq = new XMLHttpRequest();
+    }
+    if (xmlHttpReq !== null) {
+      xmlHttpReq.open('GET', './test.php', true);
+      xmlHttpReq.onreadystatechange = RequestCallBack; // bind a callback func
+      xmlHttpReq.send(null);
+    }
+
+    function RequestCallBack() {
+      if (xmlHttpReq.readyState === 4) {
+        if (xmlHttpReq.status === 200) {
+          document.getElementById('resText').innerHTML = xmlHttpReq.responseText;
+        }
+      }
+    }
+  }
+
+  </script>
+</body>
+
+</html>
