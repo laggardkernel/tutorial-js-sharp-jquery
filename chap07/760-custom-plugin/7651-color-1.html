@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-CHS">
+
+<head>
+  <meta charset="utf-8">
+  <title>Color method</title>
+  <script type="text/javascript" src="../../scripts/jquery.js"></script>
+</head>
+
+<body>
+  <div class="a">red</div>
+  <div style="color:blue;">blue</div>
+  <div style="color:green">green</div>
+  <div style="color:yellow;">yellow</div>
+  <script type="text/javascript">
+  $(function() {
+
+    // return object when value is undefined
+    (function($) {
+      $.fn.extend({
+        "color": function(value) {
+          console.log(this.css('color', value));
+          return this.css("color", value);
+        }
+      });
+    })(jQuery);
+
+
+    // (function($) {
+    //   $.fn.extend({
+    //     "color": function(value) {
+    //       if (value == undefined) {
+    //         console.log(this.css('color'));
+    //         return this.css("color");
+    //       } else {
+    //         return this.css("color", value);
+    //       }
+    //     }
+    //   });
+    // })(jQuery);
+
+    alert($('div').color() + '\n返回字符串，证明此插件可用。');
+    alert($('div').color('red') + '\n返回 object 证明得到的是 jQuery 对象。');
+  });
+
+  </script>
+</body>
+
+</html>

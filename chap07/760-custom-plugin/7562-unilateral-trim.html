@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-CHS">
+
+<head>
+  <meta charset="utf-8">
+  <title>ltrim &amp; rtrim plugin</title>
+  <script type="text/javascript" src="../../scripts/jquery.js"></script>
+  <style type="text/css">
+  body {
+    margin: 30px;
+  }
+
+  </style>
+</head>
+
+<body>
+  <textarea id="trimTest" rows="5" cols="20"></textarea>
+  <script type="text/javascript">
+  $(function() {
+    (function($) {
+      $.extend({
+        'ltrim': function(text) {
+          return (text || "").replace(/^\s+/g, ""); // incase of undefined
+        },
+        'rtrim': function(text) {
+          return (text || "").replace(/\s+$/, "");
+        }
+      });
+    })(jQuery);
+
+    $('#trimTest').val(
+      $.trim("     test     ") + "\n" +
+      $.ltrim("     test     ") + "\n" +
+      $.rtrim("     test     ")
+    );
+
+  });
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-CHS">
+
+<head>
+  <meta charset="utf-8">
+  <title>jQuery-Form dataType</title>
+  <script type="text/javascript" src="../../scripts/jquery.js"></script>
+  <script type="text/javascript" src="./scripts/jquery.form.js"></script>
+</head>
+
+<body>
+  <h3>form plugin 的使用——dataType控制回调函数数据格式</h3>
+  <h4>HTML方式返回</h4>
+  <form id="htmlForm" action="./html.php" method="post">
+    名称：
+    <input type="text" name="name" />
+    <br /> 地址：
+    <input type="text" name="address" />
+    <br /> 自我介绍：
+    <textarea name="comment"></textarea>
+    <br />
+    <input type="submit" id="htmlTest" value="提交" />
+    <br />
+    <div id="htmlOut" style="display:none;"></div>
+  </form>
+  <h4>XML方式返回</h4>
+  <form id="xmlForm" action="./xml.php" method="post">
+    名称：
+    <input type="text" name="name" />
+    <br /> 地址：
+    <input type="text" name="address" />
+    <br /> 自我介绍：
+    <textarea name="comment"></textarea>
+    <br />
+    <input type="submit" id="xmlTest" value="提交" />
+    <br />
+    <div id="xmlOut"></div>
+  </form>
+  <h4>JSON方式返回</h4>
+  <form id="jsonForm" action="./json.php" method="post">
+    名称：
+    <input type="text" name="name" />
+    <br /> 地址：
+    <input type="text" name="address" />
+    <br /> 自我介绍：
+    <textarea name="comment"></textarea>
+    <br />
+    <input type="submit" id="jsonTest" value="提交" />
+    <br />
+    <div id="jsonOut"></div>
+  </form>
+  <script type="text/javascript">
+  $(document).ready(function() {
+    $('#htmlForm').ajaxForm({
+      target: '#htmlOut',
+      success: function(responseText) {
+        $('#htmlOut').html(responseText).show('slow').slideUp('slow');
+      }
+    });
+
+    $('#xmlForm').ajaxForm({
+      dataType: 'xml',
+      success: processXML
+    });
+
+    function processXML(responseXML) {
+      var name = $('name', responseXML).text(),
+        address = $('address', responseXML).text(),
+        comment = $('comment', responseXML).text();
+      $('#xmlOut').html(name + " " + address + " " + comment);
+    }
+
+    $('#jsonForm').ajaxForm({
+      dataType: 'json',
+      success: processJSON
+    });
+
+    function processJSON(data) {
+      $('#jsonOut').html(data.name + " " + data.address + " " + data.comment);
+    }
+  });
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-CHS">
+
+<head>
+  <meta charset="utf-8">
+  <title>Custom Selector Method</title>
+  <script type="text/javascript" src="../../scripts/jquery.js"></script>
+  <style type="text/css">
+  body {
+    margin: 30px;
+  }
+
+  </style>
+</head>
+
+<body>
+  <div style="background-color:red">0</div>
+  <div style="background-color:blue">1</div>
+  <div style="background-color:green">2</div>
+  <div style="background-color:yellow">3</div>
+  <div style="background-color:green">4</div>
+  <div style="background-color:orange">5</div>
+  <script type="text/javascript">
+  $(function() {
+    (function($) {
+      $.extend(jQuery.expr[":"], {
+        between: function(a, i, m) { // deprecated
+          var tmp = m[3].split(",");
+          return tmp[0] - 0 < i && i < tmp[1] - 0;
+        }
+      });
+    })(jQuery);
+
+    $("div:between(2,5)").css('backgroud-color', 'white');
+  });
+
+  </script>
+</body>
+
+</html>

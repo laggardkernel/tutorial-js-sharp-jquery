@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-CHS">
+
+<head>
+  <meta charset="utf-8">
+  <title>Validation Demo</title>
+  <link rel="stylesheet" type="text/css" href="./css/style.css" />
+  <script type="text/javascript" src="../../scripts/jquery.js"></script>
+  <script type="text/javascript" src="./scripts/jquery.validate.js"></script>
+  <script type="text/javascript" src="./scripts/messages_zh.js"></script>
+</head>
+
+<body>
+  <form class="cmxform" id="commentForm" method="get" action="#">
+    <fieldset>
+      <legend>一个简单的带有验证提示的评论例子</legend>
+      <p>
+        <label for="cusername">姓名</label><em>*</em>
+        <input id="cusername" name="username" size="25" />
+      </p>
+      <p>
+        <label for="cemail">电子邮件</label><em>*</em>
+        <input id="cemail" name="email" size="25" />
+      </p>
+      <p>
+        <label for="curl">网址</label><em style="visibility: hidden;">x</em>
+        <input id="curl" name="url" size="25" value="" />
+      </p>
+      <p>
+        <label for="ccomment">你的评论</label><em>*</em>
+        <textarea id="ccomment" name="comment" cols="25"></textarea>
+      </p>
+      <p>
+        <input class="submit" type="submit" value="提交" />
+      </p>
+    </fieldset>
+  </form>
+  <script type="text/javascript">
+  $(document).ready(function() {
+    $('#commentForm').validate({
+      rules: {
+        username: {
+          required: true,
+          minlength: 2
+        },
+        email: {
+          required: true,
+          email: true
+        },
+        url: "url",
+        comment: "required"
+      }
+    });
+  });
+
+  </script>
+</body>
+
+</html>

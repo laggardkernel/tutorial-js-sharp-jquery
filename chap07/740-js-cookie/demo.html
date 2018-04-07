@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="zh-CHS">
+
+<head>
+  <meta charset="utf-8">
+  <title>js-cookie API Demo</title>
+  <script type="text/javascript" src="../../scripts/jquery.js"></script>
+  <script type="text/javascript" src="./js/js.cookie.js"></script>
+</head>
+
+<body>
+  用户名：
+  <input type="text" name="username" id="username" />
+  <br />
+  <input type="checkbox" name="check" id="check" />记住用户名
+  <!-- actions are executed at the end -->
+  <script type="text/javascript">
+  var COOKIE_NAME = 'username';
+  if (Cookies.get(COOKIE_NAME)) {
+    $('#username').val(Cookies.get(COOKIE_NAME));
+  }
+  $('#check').click(function() {
+    if (this.checked) {
+      Cookies.set(COOKIE_NAME, $('#username').val(), { path: '/', expires: 10 });
+    } else {
+      Cookies.remove(COOKIE_NAME, { path: '/' });
+    }
+  });
+
+  </script>
+</body>
+
+</html>

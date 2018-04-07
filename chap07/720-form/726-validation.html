@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-CHS">
+
+<head>
+  <meta charset="utf-8">
+  <title>Validation</title>
+  <script type="text/javascript" src="../../scripts/jquery.js"></script>
+  <script type="text/javascript" src="./scripts/jquery.form.js"></script>
+</head>
+
+<body>
+  <h3>Validation before submission using jQuery-Form plugin</h3>
+  <h4>Validate with formData</h4>
+  <form id="form1" action="./ajax2.php" method="post">
+    名称：
+    <input type="text" name="name" />
+    <br /> 地址：
+    <input type="text" name="address" />
+    <br /> 自我介绍：
+    <textarea name="comment"></textarea>
+    <br />
+    <input type="submit" id="test1" value="提交" />
+    <br />
+    <div id="output1"></div>
+  </form>
+  <h4>Validate with jqForm</h4>
+  <form id="form2" action="./ajax2.php" method="post">
+    名称：
+    <input type="text" name="name" />
+    <br /> 地址：
+    <input type="text" name="address" />
+    <br /> 自我介绍：
+    <textarea name="comment"></textarea>
+    <br />
+    <input type="submit" id="test2" value="提交" />
+    <br />
+    <div id="output2"></div>
+  </form>
+  <h4>Validate with fieldValue()</h4>
+  <form id="form3" action="./ajax2.php" method="post">
+    名称：
+    <input type="text" name="name" />
+    <br /> 地址：
+    <input type="text" name="address" />
+    <br /> 自我介绍：
+    <textarea name="comment"></textarea>
+    <br />
+    <input type="submit" id="test3" value="提交" />
+    <br />
+    <div id="output3"></div>
+  </form>
+  <script type="text/javascript">
+  $(document).ready(function() {
+
+    $('#form1').ajaxForm({
+      target: '#output1',
+      beforeSubmit: function(formData, jqForm, options) {
+        // validate with formData
+        for (var i = 0; i < formData.length; i++) {
+          if (!formData[i].value) {
+            alert('用户名、地址和自我介绍都不得为空！');
+            return false;
+          }
+        }
+        var queryString = $.param(formData);
+        console.log(queryString);
+        return true;
+      },
+      success: function() {
+        $('#output1').html("提交成功！欢迎下次再来！").show();
+      }
+    });
+
+    $('#form2').ajaxForm({
+      target: '#output2',
+      beforeSubmit: function(formData, jqForm, options) {
+        // validate with jqForm[0]
+        var form = jqForm[0]; // like an array
+        if (!form.name.value || !form.address.value) {
+          alert('用户名和地址不能为空，自我介绍可以为空！');
+          return false;
+        }
+        var queryString = $.param(formData);
+        console.log(queryString);
+        return true;
+      },
+      success: function() {
+        $('#output2').html("提交成功！欢迎下次再来！").show();
+      }
+    });
+
+    $('#form3').ajaxForm({
+      target: '#output3',
+      beforeSubmit: function(formData, jqForm, options) {
+        // validate with fieldValue()
+        var name = $('input[name=name]', '#form3').fieldValue(),
+          address = $('input[name=address]', '#form3').fieldValue();
+        if (!name[0] || !address[0]) {
+          alert('用户名和地址不能为空，自我介绍可以为空！');
+          return false;
+        }
+        var queryString = $.param(formData);
+        console.log(queryString);
+        return true;
+      },
+      success: function() {
+        $('#output3').html("提交成功！欢迎下次再来！").show();
+      }
+    });
+
+
+  });
+
+  </script>
+</body>
+
+</html>

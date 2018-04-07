@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-CHS">
+
+<head>
+  <meta charset="utf-8">
+  <title>jQuery UI Sortable</title>
+  <link rel="stylesheet" type="text/css" href="./css/style.css" />
+  <script type="text/javascript" src="../../scripts/jquery.js"></script>
+  <link rel="stylesheet" type="text/css" href="./js/jquery-ui.css" />
+  <script type="text/javascript" src="./js/jquery-ui.js"></script>
+</head>
+
+<body>
+  <ul id="myList">
+    <li id="myList_mood">
+      <a href="#">心情</a>
+    </li>
+    <li id="myList_photo">
+      <a href="#">相册</a>
+      <a href="#" class="qlink">上传</a>
+    </li>
+    <li id="myList_blog">
+      <a href="#">日志</a>
+      <a href="#" class="qlink">发表</a>
+    </li>
+    <li id="myList_vote">
+      <a href="#">投票</a>
+    </li>
+    <li id="myList_share">
+      <a href="#">分享</a>
+    </li>
+    <li id="myList_group">
+      <a href="#">群组</a>
+    </li>
+  </ul>
+  <script type="text/javascript">
+  $(function() {
+    $('#myList').sortable({
+      delay: 1,
+      stop: function() {
+        $.post(
+          "./sortable.php",
+          $('#myList').sortable('serialize'),
+          function(response) {
+            console.log(response);
+            alert(response);
+          }
+        );
+      }
+    });
+  });
+
+  </script>
+</body>
+
+</html>
