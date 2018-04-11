@@ -24,12 +24,14 @@
   <div class="comment">已有评论：</div>
   <div id="resText"></div>
   <script type="text/javascript">
-  $('#send').click(function() {
-    $.get('./get1.php', {
-      username: $('#username').val(),
-      content: $('#content').val()
-    }, function(data, textStatus) {
-      $('#resText').html(data);
+  $(function() {
+    $('#send').click(function() {
+      $.get('./get1.php', {
+        username: $('#username').val(),
+        content: $('#content').val()
+      }, function(data, textStatus) {
+        $('#resText').html(data);
+      });
     });
   });
 

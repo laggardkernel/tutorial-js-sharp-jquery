@@ -13,12 +13,14 @@
   <div class="comment">已有评论：</div>
   <div id="resText"></div>
   <script type="text/javascript">
-  $('#send').click(function() {
-    $.ajax({
-      type: 'GET',
-      url: './test.js',
-      dataType: 'script'
-    })
+  $(function() {
+    $('#send').click(function() {
+      $.ajax({
+        type: 'GET',
+        url: './test.js',
+        dataType: 'script'
+      })
+    });
   });
 
   </script>

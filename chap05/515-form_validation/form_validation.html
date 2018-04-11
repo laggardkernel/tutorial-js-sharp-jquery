@@ -90,51 +90,56 @@
       var $required = $('<strong class="high"> *</strong>');
       $required.insertAfter(element);
     });
-  });
 
-  $('form :input').on('blur', function() {
-    var $parent = $(this).parent(); // direct parent
+    $('form :input').on('blur', function() {
+      var $parent = $(this).parent(); // direct parent
 
-    /* reset formtip messages */
-    $parent.find('.formtips').remove();
+      /* reset formtip messages */
+      $parent.find('.formtips').remove();
 
-    if ($(this).is('#username')) {
-      if (this.value.trim() === '' || this.value.trim().length < 6) {
-        var errorMsg = '请输入至少 6 位的用户名.';
-        $parent.append('<span class="formtips onError">' + errorMsg + '</span>');
-      } else {
-        var okMsg = '输入正确.';
-        $parent.append('<span class="formtips onSuccess">' + okMsg + '</span>');
+      if ($(this).is('#username')) {
+        if (this.value.trim() === '' || this.value.trim().length < 6) {
+          var errorMsg = '请输入至少 6 位的用户名.';
+          $parent.append('<span class="formtips onError">' + errorMsg +
+            '</span>');
+        } else {
+          var okMsg = '输入正确.';
+          $parent.append('<span class="formtips onSuccess">' + okMsg +
+            '</span>');
+        }
       }
-    }
 
-    if ($(this).is('#email')) {
-      var reg = /.+@.+\.[a-zA-Z]{2,4}$/;
-      if (this.value.trim() === '' || (this.value.trim() !== '' && !reg.test(this.value.trim()))) {
-        var errorMsg = '请输入正确的 E-Mail 地址.';
-        $parent.append('<span class="formtips onError">' + errorMsg + '</span>');
-      } else {
-        var okMsg = '输入正确.';
-        $parent.append('<span class="formtips onSuccess">' + okMsg + '</span>');
+      if ($(this).is('#email')) {
+        var reg = /.+@.+\.[a-zA-Z]{2,4}$/;
+        if (this.value.trim() === '' || (this.value.trim() !== '' && !
+            reg.test(this.value.trim()))) {
+          var errorMsg = '请输入正确的 E-Mail 地址.';
+          $parent.append('<span class="formtips onError">' + errorMsg +
+            '</span>');
+        } else {
+          var okMsg = '输入正确.';
+          $parent.append('<span class="formtips onSuccess">' + okMsg +
+            '</span>');
+        }
       }
-    }
-  }).on('keyup', function() {
-    /* validate form on the go */
-    $(this).triggerHandler('blur');
-  }).on('focus', function() {
-    $(this).triggerHandler('blur');
-  });
-
-  $('#send').on('click', function() {
-    /* trigger form validation before submission */
-    $('form .required:input').each(function(index, element) {
-      $(element).triggerHandler('blur');
+    }).on('keyup', function() {
+      /* validate form on the go */
+      $(this).triggerHandler('blur');
+    }).on('focus', function() {
+      $(this).triggerHandler('blur');
     });
-    // console.log($('form .onError').length);
-    if ($('form .onError').length > 0) {
-      return false;
-    }
-    alert('注册成功，密码已发送到邮箱，注意查收.');
+
+    $('#send').on('click', function() {
+      /* trigger form validation before submission */
+      $('form .required:input').each(function(index, element) {
+        $(element).triggerHandler('blur');
+      });
+      // console.log($('form .onError').length);
+      if ($('form .onError').length > 0) {
+        return false;
+      }
+      alert('注册成功，密码已发送到邮箱，注意查收.');
+    });
   });
 
   </script>

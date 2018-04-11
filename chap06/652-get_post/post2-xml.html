@@ -24,16 +24,18 @@
   <div class="comment">已有评论：</div>
   <div id="resText"></div>
   <script type="text/javascript">
-  $('#send').click(function() {
-    $.post('./get2.php', {
-      username: $('#username').val(),
-      content: $('#content').val()
-    }, function(data, textStatus) {
-      var username = $(data).find('comment').attr('username'),
-        content = $(data).find('comment content').text(),
-        txtHTML = "<div class='comment'><h6>" + username +
-        ":</h6><p class='para'>" + content + "</p></div>";
-      $('#resText').html(txtHTML);
+  $(function() {
+    $('#send').click(function() {
+      $.post('./get2.php', {
+        username: $('#username').val(),
+        content: $('#content').val()
+      }, function(data, textStatus) {
+        var username = $(data).find('comment').attr('username'),
+          content = $(data).find('comment content').text(),
+          txtHTML = "<div class='comment'><h6>" + username +
+          ":</h6><p class='para'>" + content + "</p></div>";
+        $('#resText').html(txtHTML);
+      });
     });
   });
 

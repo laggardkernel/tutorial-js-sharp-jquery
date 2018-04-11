@@ -76,7 +76,7 @@
 
     $('tbody > tr').click(function() {
       var hasSelected = $(this).hasClass('selected');
-      console.log(hasSelected);
+      // console.log(hasSelected);
       // reverse the style
       $(this)[hasSelected ? "removeClass" : "addClass"]('selected')
         .find(':checkbox').prop('checked', !hasSelected);

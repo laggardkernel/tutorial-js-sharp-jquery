@@ -15,16 +15,19 @@
   <input type="checkbox" name="check" id="check" />记住用户名
   <!-- actions are executed at the end -->
   <script type="text/javascript">
-  var COOKIE_NAME = 'username';
-  if (Cookies.get(COOKIE_NAME)) {
-    $('#username').val(Cookies.get(COOKIE_NAME));
-  }
-  $('#check').click(function() {
-    if (this.checked) {
-      Cookies.set(COOKIE_NAME, $('#username').val(), { path: '/', expires: 10 });
-    } else {
-      Cookies.remove(COOKIE_NAME, { path: '/' });
+  $(function() {
+    var COOKIE_NAME = 'username';
+    if (Cookies.get(COOKIE_NAME)) {
+      $('#username').val(Cookies.get(COOKIE_NAME));
     }
+    $('#check').click(function() {
+      if (this.checked) {
+        Cookies.set(COOKIE_NAME, $('#username').val(), { path: '/',
+          expires: 10 });
+      } else {
+        Cookies.remove(COOKIE_NAME, { path: '/' });
+      }
+    });
   });
 
   </script>

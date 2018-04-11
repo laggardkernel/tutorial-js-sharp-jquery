@@ -24,10 +24,12 @@
   <div class="comment">已有评论：</div>
   <div id="resText"></div>
   <script type="text/javascript">
-  $('#send').click(function() {
-    $('#resText').load("./get1.php?username=" +
-      encodeURIComponent($('#username').val()) + "&content=" +
-      encodeURIComponent($('#content').val()));
+  $(function() {
+    $('#send').click(function() {
+      $('#resText').load("./get1.php?username=" +
+        encodeURIComponent($('#username').val()) + "&content=" +
+        encodeURIComponent($('#content').val()));
+    });
   });
 
   </script>

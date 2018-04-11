@@ -40,14 +40,14 @@
     $('#skin > li').click(function(event) {
       switchSkin(this.id);
     });
-  });
 
-  function switchSkin(skinName) {
-    $('#' + skinName).addClass('selected')
-      .siblings().removeClass('selected');
-    $('#cssfile').attr('href', './styles/' + skinName + '.css');
-    $.cookie('MyCssSkin', skinName, { path: '/', expires: 10 });
-  }
+    function switchSkin(skinName) {
+      $('#' + skinName).addClass('selected')
+        .siblings().removeClass('selected');
+      $('#cssfile').attr('href', './styles/' + skinName + '.css');
+      $.cookie('MyCssSkin', skinName, { path: '/', expires: 10 });
+    }
+  });
 
   </script>
 </body>

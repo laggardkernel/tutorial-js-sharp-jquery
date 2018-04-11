@@ -25,39 +25,41 @@
   <div class='comment'>已有评论：</div>
   <div id="resText"></div>
   <script type="text/javascript">
-  $('#send').click(function(event) {
-    $.ajax({
-      url: './get1.php',
-      type: 'GET',
-      global: true,
-      data: {
-        username: $('#username').val(),
-        content: $('#content').val()
-      },
-      success: function(data, textStatus) {
-        $('#resText').html(data);
-      }
-      // beforeSend: function() {
-      //   $('#loading').show();
-      //   console.log('showed');
-      // },
-      // complete: function() {
-      //   $('#loading').hide();
-      // }
+  $(function() {
+    $('#send').click(function(event) {
+      $.ajax({
+        url: './get1.php',
+        type: 'GET',
+        global: true,
+        data: {
+          username: $('#username').val(),
+          content: $('#content').val()
+        },
+        success: function(data, textStatus) {
+          $('#resText').html(data);
+        }
+        // beforeSend: function() {
+        //   $('#loading').show();
+        //   console.log('showed');
+        // },
+        // complete: function() {
+        //   $('#loading').hide();
+        // }
+      });
     });
-  });
 
-  // $.ajaxPrefilter(function(options) {
-  //   options.global = true;
-  // });
+    // $.ajaxPrefilter(function(options) {
+    //   options.global = true;
+    // });
 
-  $(document).ajaxSend(function() {
-    $('#loading').show();
-    console.log('showed');
-  });
+    $(document).ajaxSend(function() {
+      $('#loading').show();
+      console.log('showed');
+    });
 
-  $(document).ajaxComplete(function() {
-    $('#loading').hide();
+    $(document).ajaxComplete(function() {
+      $('#loading').hide();
+    });
   });
 
   </script>

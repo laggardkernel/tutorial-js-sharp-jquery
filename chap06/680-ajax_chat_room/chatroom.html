@@ -23,40 +23,42 @@
   </div>
   <!-- load scripts at the end -->
   <script type="text/javascript">
-  var timestamp = 0;
-  updateMsg();
-  $('#chatform').submit(function(event) {
-    $.post('./backend.php', {
-      message: $('#msg').val(),
-      name: $('#author').val(),
-      action: 'postmsg',
-      time: timestamp
-    }, function(xml) {
-      $('#msg').val('');
-      addMessage(xml);
+  $(function() {
+    var timestamp = 0;
+    updateMsg();
+    $('#chatform').submit(function(event) {
+      $.post('./backend.php', {
+        message: $('#msg').val(),
+        name: $('#author').val(),
+        action: 'postmsg',
+        time: timestamp
+      }, function(xml) {
+        $('#msg').val('');
+        addMessage(xml);
+      });
+      return false;
     });
-    return false;
+
+    function updateMsg() {
+      $.post('backend.php', { time: timestamp }, function(xml) {
+        $('#loading').val('');
+        addMessage(xml);
+      });
+      setTimeout('updateMsg()', 4000);
+    }
+
+    function addMessage(xml) {
+      if ($('status', xml).text() === '2') return;
+      timestamp = $('time', xml).text();
+      $('message', xml).each(function() {
+        var author = $('author', this).text(),
+          content = $('text', this).text(),
+          htmlcode = "<strong>" + author + "</strong>: " + content +
+          " <br />";
+        $('#messagewindow').prepend(htmlcode);
+      });
+    }
   });
-
-  function updateMsg() {
-    $.post('backend.php', { time: timestamp }, function(xml) {
-      $('#loading').val('');
-      addMessage(xml);
-    });
-    setTimeout('updateMsg()', 4000);
-  }
-
-  function addMessage(xml) {
-    if ($('status', xml).text() === '2') return;
-    timestamp = $('time', xml).text();
-    $('message', xml).each(function() {
-      var author = $('author', this).text(),
-        content = $('text', this).text(),
-        htmlcode = "<strong>" + author + "</strong>: " + content +
-        " <br />";
-      $('#messagewindow').prepend(htmlcode);
-    });
-  }
 
   </script>
 </body>

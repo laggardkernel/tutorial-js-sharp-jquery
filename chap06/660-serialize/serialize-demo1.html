@@ -24,10 +24,13 @@
   <div class="comment">已有评论：</div>
   <div id="resText"></div>
   <script type="text/javascript">
-  $('#send').click(function() {
-    console.log($('#form1').serialize());
-    $.get('./get1.php', $('#form1').serialize(), function(data, textStatus) {
-      $('#resText').html(data);
+  $(function() {
+    $('#send').click(function() {
+      console.log($('#form1').serialize());
+      $.get('./get1.php', $('#form1').serialize(), function(data,
+        textStatus) {
+        $('#resText').html(data);
+      });
     });
   });
 

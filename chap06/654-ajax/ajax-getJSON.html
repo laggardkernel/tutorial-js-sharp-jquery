@@ -13,21 +13,23 @@
   <div class="comment">已有评论：</div>
   <div id="resText"></div>
   <script type="text/javascript">
-  $('#send').click(function() {
-    $.ajax({
-      type: 'GET',
-      url: './test.json',
-      dataType: 'json',
-      success: function(data) {
-        $('#resText').empty();
-        var html = "";
-        $.each(data, function(indexInArray, value) {
-          html += "<div class='comment'><h6>" +
-            value['username'] + "：</h6><p class='para'>" +
-            value['content'] + "</p></div>";
-        });
-        $('#resText').html(html);
-      }
+  $(function() {
+    $('#send').click(function() {
+      $.ajax({
+        type: 'GET',
+        url: './test.json',
+        dataType: 'json',
+        success: function(data) {
+          $('#resText').empty();
+          var html = "";
+          $.each(data, function(indexInArray, value) {
+            html += "<div class='comment'><h6>" +
+              value['username'] + "：</h6><p class='para'>" +
+              value['content'] + "</p></div>";
+          });
+          $('#resText').html(html);
+        }
+      });
     });
   });
 
